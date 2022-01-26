@@ -1,9 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var multer = require("multer");
-var multer = multer();
+// var multer = multer();
 const res = require("express/lib/response");
-
+var storage = multer.diskStorage({
+  destination: function(req, file, callBack) {
+    callBack(null, "./upload");
+  },
+  filename: function(req, file, callBack) {
+    callBack(null, file.originalname);
+  },
+});
+var upload = multer({ storage: storage }).single("newFile");
 app = express();
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -73,6 +81,15 @@ app.post("/postMulPrtData", function (req, res) {
   let jsonData = req.body;
   let jsonString = JSON.stringify(jsonData);
   res.send(jsonString);
+});
+app.post("/postUpFile", function (req, res) {
+  upload(req, res, function (error) {
+    if (error) {
+      res.send(error);
+    } else {
+      res.send("File Uploaded");
+    }
+  });
 });
 app.listen(8000, function () {
   console.log("Server running");

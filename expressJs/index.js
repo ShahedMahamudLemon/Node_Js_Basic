@@ -15,6 +15,15 @@ var upload = multer({ storage: storage }).single("newFile");
 app = express();
 app.use(bodyParser.json());
 app.use(express.static("public"));
+//application level middleware
+app.use((req,res,next)=>{
+  console.log("This is application level middleware");
+  next();
+})
+app.use("/new",(req,res,next)=>{
+  console.log("This is from route middleware");
+  next();
+})
 app.get("/", function (req, res) {
   res.send("Hello Xpress");
 });
@@ -91,6 +100,7 @@ app.post("/postUpFile", function (req, res) {
     }
   });
 });
+
 app.listen(8000, function () {
   console.log("Server running");
 });

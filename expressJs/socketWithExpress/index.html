@@ -8,10 +8,16 @@
     <title>Socket with Express</title>
 </head>
 <body>
-<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, inventore!</h3>
+<h3 id="tarDiv"></h3>
 <script src="socket.io/socket.io.js"></script>
 <script>
     let socket=io();
+    // socket.on("message",function (data){
+    //     document.write(data);
+    // })
+    socket.on("message",function (data){
+        document.getElementById("tarDiv").innerHTML=data;
+    })
 </script>
 </body>
 </html>

@@ -8,6 +8,14 @@ const io=new Server(expresServer);
 io.on("connection",function (socket){
     console.log("New user connected");
 
+    // setTimeout(function (){
+    //     socket.send("Socket worked!!");
+    // },5000)
+    setInterval(function (){
+        let date =new Date();
+        let time = date.getTime();
+        socket.send(time);
+    },2000)
     socket.on("disconnect",function (){
         console.log("User disconnected")
     })

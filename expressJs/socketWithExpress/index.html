@@ -8,15 +8,39 @@
     <title>Socket with Express</title>
 </head>
 <body>
-<h3 id="tarDiv"></h3>
+<h3 id="tarId"></h3>
+<input type="text" placeholder="Enter a text" id="inputField">
+<button type="submit" onclick="btnClick()">Submit</button>
 <script src="socket.io/socket.io.js"></script>
 <script>
-    let socket=io();
+    let socket=io("/two");
     // socket.on("message",function (data){
     //     document.write(data);
     // })
-    socket.on("message",function (data){
-        document.getElementById("tarDiv").innerHTML=data;
+    // socket.on("message",function (data){
+    //     document.getElementById("tarId").innerHTML=data;
+    // })
+    //custom event
+    // socket.on("customEvent",function (data){
+    //     document.getElementById("tarId").innerHTML=data;
+    // })
+    //post data from client side
+    // function btnClick(){
+    //     let postData=document.getElementById("inputField").value;
+    //     socket.send(postData);
+    // }
+    //custom event data send
+    // function btnClick(){
+    //     let postData=document.getElementById("inputField").value;
+    //     socket.emit("customEvent",postData);
+    // }
+    //broadcast
+    // socket.on("broadcastEvn",(data)=>{
+    //     document.getElementById("tarId").innerHTML=data;
+    // })
+    //namespace
+    socket.on("custEvn",function (data){
+        document.getElementById("tarId").innerHTML=data;
     })
 </script>
 </body>
